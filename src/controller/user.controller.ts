@@ -2,6 +2,7 @@
 import { NextFunction, Request, response, Response } from "express";
 import { User } from "../model/UserOB";
 import prisma from "../config/db";
+import { loginUser } from "../service/auth.service";
 
 export const register = async (req: Request, res: Response, next: NextFunction) => {
     const { name, email, password, active, role } = req.body as User;
@@ -37,4 +38,20 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
     }
 
 
+}
+
+
+export const login = async (req: Request, res: Response, next: NextFunction) => {
+    const { email, password } = req.body;
+
+    try {
+        const result = await loginUser(email, password);
+        if (result === null) {
+            return res.status(400).json({ message: result });
+        }
+        console.log("result...........",result)
+        return res.status(200).json({ message: "Login successful", result});
+    } catch {
+        return res.status(500).json({ message: "Internal server error" });
+    }
 }

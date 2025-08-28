@@ -1,7 +1,6 @@
 
 import { NextFunction, Request, response, Response } from "express";
 import { User } from "../model/UserOB";
-import { getUserByEmail, registerUser } from "../service/auth.service";
 import prisma from "../config/db";
 
 export const register = async (req: Request, res: Response, next: NextFunction) => {

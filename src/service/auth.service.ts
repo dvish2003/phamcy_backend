@@ -2,23 +2,6 @@ import prisma from "../config/db";
 import { User } from "../model/UserOB";
 import { generateToken } from "../util/auth";
 
-export const registerUser = async(email:string, name:string, password:string)=>{
-  try{
-      const user = await prisma.user.create({
-         data: {
-             email,
-             name,
-             password
-         }
-    })
-    return user;
-  }
-  catch(error){
-    console.error("Error registering user:", error);
-    throw new Error("Error registering user");
-  }
-}
-
 
 export const loginUser = async(email:string, password:string) =>{
     const user = await prisma.user.findUnique({

@@ -1,16 +1,6 @@
 import prisma from "../config/db";
+import { User } from "../model/UserOB";
 import { generateToken } from "../util/auth";
-
-export const registerUser = async(email:string, name:string, password:string) =>{
-    const user = await prisma.user.create({
-         data: {
-             email,
-             name,
-             password
-         }
-    })
-    return user;
-}
 
 
 export const loginUser = async(email:string, password:string) =>{
@@ -39,8 +29,8 @@ export const getUserByEmail = async (email: string) => {
     const user = await prisma.user.findUnique({
         where: { email }
     });
-    if(!user) {
-    return false;
-    }
+    if(user === null) {
     return true;
+    }
+    if(user !== null) return false;
 }

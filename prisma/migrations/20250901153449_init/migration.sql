@@ -1,11 +1,11 @@
 -- CreateTable
 CREATE TABLE "public"."User" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
+    "id" UUID NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "active" BOOLEAN NOT NULL,
     "role" TEXT NOT NULL,
+    "verification_code" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );

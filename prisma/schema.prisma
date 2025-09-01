@@ -14,10 +14,12 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  name     String
-  email    String  @unique
-  password String
-  active   Boolean
-  role     String
+  id                 String   @id @default(uuid()) @db.Uuid
+  email              String   @unique
+  name               String
+  password           String
+  active             Boolean
+  role               String
+  verification_code  String?   // nullable, defaults to NULL
 }
+

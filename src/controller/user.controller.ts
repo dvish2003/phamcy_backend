@@ -46,11 +46,11 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
     try {
         const result = await loginUser(email, password);
-        if (result === null) {
+        if (typeof result === "string" || result === null) {
             return res.status(400).json({ message: result });
         }
-        console.log("result...........",result)
-        return res.status(200).json({ message: "Login successful", result});
+        console.log("result...........", result);
+        return res.status(200).json({ message: "Login successful", user: result.user, token: result.token });
     } catch {
         return res.status(500).json({ message: "Internal server error" });
     }
